@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('institule_mat')->unique();
             $table->integer('quota_horaire');
             $table->string('semestre');
+            $table->float('prix');
             $table->string('enseignant_code');
             $table->foreign('enseignant_code')->references('code')->on('enseignants');
+            $table->foreignId('niveau_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

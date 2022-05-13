@@ -20,8 +20,6 @@ return new class extends Migration
             $table->date('jour');
             $table->string('matiere_code');
             $table->foreign('matiere_code')->references('code')->on('matieres')->onDelete('cascade');
-            $table->string('reglement_code');
-            $table->foreign('reglement_code')->references('code')->on('reglements');
             $table->foreignId('anne_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

@@ -17,11 +17,6 @@ class Emargement extends Model
         return $this->belongsTo(Anne::class);
     }
 
-    public function reglement() : BelongsTo
-    {
-        return $this->belongsTo(Reglement::class);
-    }
-
     public function matiere() : BelongsTo
     {
         return $this->belongsTo(Matiere::class);

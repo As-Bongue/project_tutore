@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('telephone')->unique();
             $table->string('email')->unique();
             $table->string('adresse');
+            $table->float('montant')->default(0.00);
             $table->timestamps();
         });
     }
@@ -28,7 +29,7 @@ return new class extends Migration
      * Reverse the migrations.
      *
      * @return void
-     */ 
+     */
     public function down()
     {
         Schema::dropIfExists('enseignants');

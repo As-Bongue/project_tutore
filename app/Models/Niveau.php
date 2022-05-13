@@ -13,11 +13,6 @@ class Niveau extends Model
 
     protected $fillable = ['intitule'];
 
-    public function reglement() : HasOne
-    {
-        return $this->hasOne(Reglement::class);
-    }
-
     public function specialites() : BelongsToMany
     {
         return $this->belongsToMany(Specialite::class);
