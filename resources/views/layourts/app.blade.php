@@ -8,10 +8,18 @@
     <title>Document</title>
 </head>
 <body>
+
+    @include('layourts.partials._navbar')
+
     <div class="container mx-auto">
         @yield('content')
     </div>
 
+    <footer>
+        @yield('footer')
+    </footer>
+
     <script src="{{ asset('js/app.js') }}"></script>
+    
 </body>
 </html>

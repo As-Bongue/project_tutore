@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('niveaux', function (Blueprint $table) {
-            $table->id();
-            $table->string('institule_niv')->unique();
+        Schema::create('filieres', function (Blueprint $table) {
+            $table->string('code')->primary();  
+            $table->string('intitule')->unique();
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('niveaux');
+        Schema::dropIfExists('filieres');
     }
 };

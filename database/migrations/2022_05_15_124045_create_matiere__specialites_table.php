@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('enseignants', function (Blueprint $table) {
-            $table->string('code')->primary();
-            $table->string('nom');
-            $table->string('prenom');
-            $table->string('telephone')->unique();
-            $table->string('email')->unique();
-            $table->string('adresse');
-            $table->float('montant')->default(0.00);
+        Schema::create('matiere__specialite', function (Blueprint $table) {
+            $table->string('matiere_code');
+            $table->string('specialite_code');
+            $table->foreign('matiere_code')->references('code')->on('matieres')->onDelete('cascade');
+            $table->foreign('specialite_code')->references('code')->on('specialites')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('enseignants');
+        Schema::dropIfExists('matiere__specialite');
     }
 };

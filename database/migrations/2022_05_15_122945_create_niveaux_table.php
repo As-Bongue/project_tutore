@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('filieres', function (Blueprint $table) {
-            $table->string('code')->primary();
-            $table->string('institule_fil')->unique();
+        Schema::create('niveaux', function (Blueprint $table) {
+            $table->id();
+            $table->string('intitule')->unique();
+            $table->foreignId('cycle_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('filieres');
+        Schema::dropIfExists('niveaux');
     }
 };

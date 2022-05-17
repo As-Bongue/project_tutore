@@ -2,14 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Specialite extends Model
 {
     use HasFactory;
+
+    protected $table = 'specialites';
+
+    protected $primaryKey = 'code';
+
+    protected $keyType = 'string';
 
     protected $guarded = [];
 
@@ -20,11 +26,6 @@ class Specialite extends Model
 
     public function matieres() : BelongsToMany
     {
-        return $this->belongsToMany(Matiere::class);
-    }
-
-    public function niveaux() : BelongsToMany
-    {
-        return $this->belongsToMany(Niveau::class);
+        return $this->belongsToMany(Matiere::class, 'matiere_specialite', 'matiere_code', 'specialite_code');
     }
 }

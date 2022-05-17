@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\EnseignantController;
+use App\Http\Controllers\FiliereController;
+use App\Http\Controllers\NiveauController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +17,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('exemple');
+    return view('welcome');
 });
+
+Route::resource('enseignant', EnseignantController::class)->names('enseignant');
+
+Route::resource('filiere', FiliereController::class)->names('filiere');
+
+Route::resource('niveau', NiveauController::class)->names('niveau');

@@ -10,10 +10,16 @@ class Filiere extends Model
 {
     use HasFactory;
 
+    protected $table = 'filieres';
+
+    protected $primaryKey = 'code';
+
+    protected $keyType = 'string';
+
     protected $guarded = [];
 
     public function specialites() : HasMany
     {
-        return $this->hasMany(Specialite::class);
+        return $this->hasMany(Specialite::class, 'filiere_code');
     }
 }

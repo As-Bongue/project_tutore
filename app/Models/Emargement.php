@@ -10,16 +10,15 @@ class Emargement extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
-
-    public function anne() : BelongsTo
-    {
-        return $this->belongsTo(Anne::class);
-    }
+    protected $fillable = ['heure_debut', 'heure_fin'];
 
     public function matiere() : BelongsTo
     {
         return $this->belongsTo(Matiere::class);
     }
 
+    public function moi() : BelongsTo
+    {
+        return $this->belongsTo(Moi::class);
+    }
 }

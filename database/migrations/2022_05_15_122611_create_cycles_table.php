@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('matiere_specialite', function (Blueprint $table) {
-            $table->string('matiere_code');
-            $table->string('specialite_code');
-            $table->foreign('matiere_code')->references('code')->on('matieres')->onDelete('cascade');
-            $table->foreign('specialite_code')->references('code')->on('specialites')->onDelete('cascade');
+        Schema::create('cycles', function (Blueprint $table) {
+            $table->id();
+            $table->string('intitule')->unique();
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('matiere_specialite');
+        Schema::dropIfExists('cycles');
     }
 };

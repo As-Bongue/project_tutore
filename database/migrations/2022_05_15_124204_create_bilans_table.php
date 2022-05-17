@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('emargements', function (Blueprint $table) {
+        Schema::create('bilans', function (Blueprint $table) {
             $table->id();
-            $table->time('heure_debut');
-            $table->time('heure_fin');
-            $table->date('jour');
-            $table->string('matiere_code');
-            $table->foreign('matiere_code')->references('code')->on('matieres')->onDelete('cascade');
-            $table->foreignId('anne_id')->constrained()->onDelete('cascade');
+            $table->foreignId('annee_academiques_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('emargements');
+        Schema::dropIfExists('bilans');
     }
 };

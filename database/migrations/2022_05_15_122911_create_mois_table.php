@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
- 
+
 return new class extends Migration
 {
     /**
@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bilans', function (Blueprint $table) {
+        Schema::create('mois', function (Blueprint $table) {
             $table->id();
-            $table->string('description')->unique();
-            $table->foreignId('anne_id')->constrained()->onDelete('cascade');
+            $table->string('libele');
+            $table->foreignId('annee_academique_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bilans');
+        Schema::dropIfExists('mois');
     }
 };

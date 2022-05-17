@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Enseignant;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // Enseignant::factory()->count(3)->create();
         // \App\Models\User::factory(10)->create();
     }
 }

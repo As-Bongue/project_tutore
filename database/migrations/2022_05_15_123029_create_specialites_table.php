@@ -14,11 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('specialites', function (Blueprint $table) {
-            $table->engine='InnoDB';
             $table->string('code')->primary();
-            $table->string('institule_spe')->unique();
+            $table->string('intitule')->unique();
             $table->string('filiere_code');
-            $table->foreign('filiere_code')->references('code')->on('filieres');
+            $table->foreign('filiere_code')->references('code')->on('filieres')->onDelete('cascade');
             $table->timestamps();
         });
     }
