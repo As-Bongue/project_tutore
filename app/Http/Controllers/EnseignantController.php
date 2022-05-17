@@ -26,7 +26,9 @@ class EnseignantController extends Controller
      */
     public function create()
     {
-        return view('pages.enseignant.create');
+        $ens = new Enseignant();
+
+        return view('pages.enseignant.create', compact('ens'));
     }
 
     /**
@@ -94,7 +96,7 @@ class EnseignantController extends Controller
             'adresse' => $request->adresse,
         ]);
 
-        return redirect()->route('enseignant.index');
+        return redirect()->route('enseignant.show', $enseignant);
     }
 
     /**

@@ -2,6 +2,4 @@
 
 @section('content')
 
-    @include('layourts.partials._navbar')
-
 @stop

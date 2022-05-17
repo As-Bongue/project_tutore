@@ -11,7 +11,7 @@ class Moi extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['libele'];
+    protected $fillable = ['libele', 'annee_academique_id'];
 
     public function annee_academique() : BelongsTo
     {

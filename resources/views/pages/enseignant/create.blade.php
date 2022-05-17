@@ -7,12 +7,7 @@
     <form action="{{ route('enseignant.store') }}" method="POST">
         @csrf
 
-        @include('pages.enseignant._form')
-
-        <div class="block">
-            <input type="submit" value="Creer" >
-        </div>
-
+        @include('pages.enseignant._form', ['submitButton' => 'Creer'])
     </form>
 
     <p><a href="">Accueil</a></p>

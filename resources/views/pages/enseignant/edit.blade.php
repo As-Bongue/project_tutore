@@ -6,10 +6,7 @@
         @method('PUT')
         @csrf
 
-        @include('pages.enseignant._form')
-
-        <input type="submit" value="Editer">
-
+        @include('pages.enseignant._form', ['submitButton' => 'Editer'])
     </form>
 
 @stop

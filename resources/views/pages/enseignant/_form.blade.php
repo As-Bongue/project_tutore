@@ -29,3 +29,6 @@
     <input type="text" name="adresse" id="adresse" placeholder="Adresse" value="{{ old('adresse') ?? $ens->adresse }}">
 </div>
 
+<div class="block">
+    <input type="submit" value="{{ $submitButton }}" >
+</div>

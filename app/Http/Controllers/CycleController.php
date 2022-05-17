@@ -14,7 +14,9 @@ class CycleController extends Controller
      */
     public function index()
     {
-        //
+        $cycles = Cycle::all();
+
+        return view('pages.cycle.cycles', compact('cycles'));
     }
 
     /**
@@ -24,7 +26,8 @@ class CycleController extends Controller
      */
     public function create()
     {
-        //
+        $cycles = new Cycle();
+        return view('pages.cycle.create', compact('cycles'));
     }
 
     /**
@@ -35,7 +38,11 @@ class CycleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Cycle::create([
+            'intitule' => $request->cycle,
+        ]);
+
+        return redirect()->route('cycle.index');
     }
 
     /**
@@ -46,7 +53,9 @@ class CycleController extends Controller
      */
     public function show(Cycle $cycle)
     {
-        //
+        $cycles = Cycle::whereId($cycle->id)->first();
+
+        return view('pages.cycle.show', compact('cycles'));
     }
 
     /**
@@ -57,7 +66,9 @@ class CycleController extends Controller
      */
     public function edit(Cycle $cycle)
     {
-        //
+        $cycles = Cycle::whereId($cycle->id)->firstOrFail();
+
+        return view('pages.cycle.edit', compact('cycles'));
     }
 
     /**
@@ -69,7 +80,13 @@ class CycleController extends Controller
      */
     public function update(Request $request, Cycle $cycle)
     {
-        //
+        $cycles = Cycle::whereId($cycle->id)->firstOrFail();
+
+        $cycles->update([
+            'intitule' => $request->cycle,
+        ]);
+
+        return redirect()->route('cycle.show', $cycle);
     }
 
     /**
@@ -80,6 +97,8 @@ class CycleController extends Controller
      */
     public function destroy(Cycle $cycle)
     {
-        //
+        Cycle::destroy($cycle->id);
+
+        return redirect()->route('cycle.index');
     }
 }
