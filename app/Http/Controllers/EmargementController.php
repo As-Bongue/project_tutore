@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Emargement;
+use App\Models\Matiere;
+use App\Models\Moi;
 use Illuminate\Http\Request;
 
 class EmargementController extends Controller
@@ -14,7 +16,9 @@ class EmargementController extends Controller
      */
     public function index()
     {
-        //
+        $emargements = Emargement::all();
+
+        return view('pages.emargement.emargements', compact('emargements'));
     }
 
     /**
@@ -24,7 +28,13 @@ class EmargementController extends Controller
      */
     public function create()
     {
-        //
+        $matieres = Matiere::all();
+
+        $mois = Moi::all();
+
+        $emargements = new Emargement();
+
+        return view('pages.emargement.create', compact('emargements', 'matieres', 'mois'));
     }
 
     /**
@@ -35,7 +45,16 @@ class EmargementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        Emargement::create([
+            'heure_debut' => $request->heure_debut,
+            'heure_fin' => $request->heure_fin,
+            'jour' => $request->date,
+            'matiere_code' => $request->matiere,
+            'moi_id' => $request->moi,
+        ]);
+
+        return redirect()->route('emargement.index');
     }
 
     /**
@@ -46,7 +65,9 @@ class EmargementController extends Controller
      */
     public function show(Emargement $emargement)
     {
-        //
+        $emargements = Emargement::whereId($emargement->id)->first();
+
+        return view('pages.emargement.show', compact('emargements'));
     }
 
     /**
@@ -57,7 +78,13 @@ class EmargementController extends Controller
      */
     public function edit(Emargement $emargement)
     {
-        //
+        $matieres = Matiere::all();
+
+        $mois = Moi::all();
+
+        $emargements = Emargement::whereId($emargement->id)->firstOrFail();
+
+        return view('pages.emargement.edit', compact('matieres', 'mois', 'emargements'));
     }
 
     /**
@@ -69,7 +96,17 @@ class EmargementController extends Controller
      */
     public function update(Request $request, Emargement $emargement)
     {
-        //
+        $emargements = Emargement::whereId($emargement->id)->firstOrFail();
+
+        $emargements->update([
+            'heure_debut' => $request->heure_debut,
+            'heure_fin' => $request->heure_fin,
+            'jour' => $request->date,
+            'matiere_code' => $request->matiere,
+            'moi_id' => $request->moi,
+        ]);
+
+        return redirect()->route('emargement.show', $emargements);
     }
 
     /**
@@ -80,6 +117,8 @@ class EmargementController extends Controller
      */
     public function destroy(Emargement $emargement)
     {
-        //
+        Emargement::destroy($emargement->id);
+
+        return redirect()->route('emargement.index');
     }
 }

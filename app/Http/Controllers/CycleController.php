@@ -39,6 +39,7 @@ class CycleController extends Controller
     public function store(Request $request)
     {
         Cycle::create([
+            'code' => $request->code,
             'intitule' => $request->cycle,
         ]);
 
@@ -53,7 +54,7 @@ class CycleController extends Controller
      */
     public function show(Cycle $cycle)
     {
-        $cycles = Cycle::whereId($cycle->id)->first();
+        $cycles = Cycle::whereCode($cycle->code)->first();
 
         return view('pages.cycle.show', compact('cycles'));
     }
@@ -66,7 +67,7 @@ class CycleController extends Controller
      */
     public function edit(Cycle $cycle)
     {
-        $cycles = Cycle::whereId($cycle->id)->firstOrFail();
+        $cycles = Cycle::whereCode($cycle->code)->firstOrFail();
 
         return view('pages.cycle.edit', compact('cycles'));
     }
@@ -80,13 +81,14 @@ class CycleController extends Controller
      */
     public function update(Request $request, Cycle $cycle)
     {
-        $cycles = Cycle::whereId($cycle->id)->firstOrFail();
+        $cycles = Cycle::whereCode($cycle->code)->firstOrFail();
 
         $cycles->update([
+            'code' => $request->code,
             'intitule' => $request->cycle,
         ]);
 
-        return redirect()->route('cycle.show', $cycle);
+        return redirect()->route('cycle.show', $cycles);
     }
 
     /**
@@ -97,7 +99,7 @@ class CycleController extends Controller
      */
     public function destroy(Cycle $cycle)
     {
-        Cycle::destroy($cycle->id);
+        Cycle::destroy($cycle->code);
 
         return redirect()->route('cycle.index');
     }

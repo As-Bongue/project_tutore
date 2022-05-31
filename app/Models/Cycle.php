@@ -10,10 +10,16 @@ class Cycle extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['intitule'];
+    protected $table = 'cycles';
+
+    protected $primaryKey = 'code';
+
+    protected $keyType = 'string';
+
+    protected $guarded = [];
 
     public function niveaux() : HasMany
     {
-        return $this->hasMany(Niveau::class);
+        return $this->hasMany(Niveau::class, 'cycle_code');
     }
 }

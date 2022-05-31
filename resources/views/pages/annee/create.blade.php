@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <form action="{{ route('annee.store') }}" method="POST">
+    <form action="{{ route('annees.store') }}" method="POST">
         @csrf
 
         @include('pages.annee._form', ['submitButton' => 'Creer'])

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AnneController;
+use App\Http\Controllers\AnneeController;
 use App\Http\Controllers\BilanController;
 use App\Http\Controllers\CycleController;
 use App\Http\Controllers\EmargementController;
@@ -32,13 +32,13 @@ Route::resource('filiere', FiliereController::class)->names('filiere');
 
 Route::resource('niveau', NiveauController::class)->names('niveau');
 
-Route::resource('annee_academique', AnneController::class)->names('annee');
-
 Route::resource('cycle', CycleController::class)->names('cycle');
 
 Route::resource('specialite', SpecialiteController::class)->names('specialite');
 
 Route::resource('matieres', MatiereController::class)->names('matieres');
+
+Route::resource('annees', AnneeController::class)->names('annees');
 
 Route::resource('emargement', EmargementController::class)->names('emargement');
 

@@ -19,8 +19,8 @@ return new class extends Migration
             $table->time('heure_fin');
             $table->date('jour');
             $table->string('matiere_code');
-            $table->foreignId('moi_id')->constrained()->onDelete('cascade');
-            $table->foreign('matiere_code')->references('code')->on('matieres')->onDelete('cascade');
+            $table->foreignId('moi_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('matiere_code')->references('code')->on('matieres')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

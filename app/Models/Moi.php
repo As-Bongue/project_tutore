@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Moi extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['libele', 'annee_academique_id'];
+    protected $fillable = ['libele'];
 
-    public function annee_academique() : BelongsTo
+    public function annees() : BelongsToMany
     {
-        return $this->belongsTo(Annee_academique::class);
+        return $this->BelongsToMany(Annee::class , 'annee_moi', 'annees_id', 'mois_id');
     }
 
     public function emargements() : HasMany

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <form action="{{ route('cycle.update', $cycles->id) }}" method="POST">
+    <form action="{{ route('cycle.update', $cycles->code) }}" method="POST">
         @method('PUT')
         @csrf
 

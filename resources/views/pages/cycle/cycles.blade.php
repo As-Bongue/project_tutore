@@ -2,14 +2,14 @@
 
 @section('content')
 
-    <h1>Liste des Cycles</h1>
+    <h1 class="h1 text-center">Liste des Cycles</h1>
 
     <hr>
     @forelse ($cycles as $cycle)
-        <p><a href="{{ route('cycle.show', $cycle->id) }}">{{ $cycle->intitule }}</a></p>
+        <p><a href="{{ route('cycle.show', $cycle->code) }}">{{ $cycle->intitule }}</a></p>
         <p>
-            <a href="{{ route('cycle.edit', $cycle->id) }}">Editer</a>
-        <form action="{{ route('cycle.destroy', $cycle->id) }}" method="POST">
+            <a href="{{ route('cycle.edit', $cycle->code) }}">Editer</a>
+        <form action="{{ route('cycle.destroy', $cycle->code) }}" method="POST">
             @method('DELETE')
             @csrf
 

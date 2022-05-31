@@ -14,8 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bilans', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('annee_academiques_id')->constrained()->onDelete('cascade');
+            $table->string('code')->primary();
+            $table->string('description');
+            $table->foreignId('annees_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

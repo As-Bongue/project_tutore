@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Enseignant;
 use App\Models\Matiere;
+use App\Models\Niveau;
 use Illuminate\Http\Request;
 
 class MatiereController extends Controller
@@ -14,7 +16,9 @@ class MatiereController extends Controller
      */
     public function index()
     {
-        //
+        $matieres = Matiere::all();
+
+        return view('pages.matiere.matieres', compact('matieres'));
     }
 
     /**
@@ -24,7 +28,13 @@ class MatiereController extends Controller
      */
     public function create()
     {
-        //
+        $matieres = new Matiere();
+
+        $enseignants = Enseignant::all();
+
+        $niveaux = Niveau::all();
+
+        return view('pages.matiere.create', compact('matieres', 'enseignants', 'niveaux'));
     }
 
     /**
@@ -35,7 +45,17 @@ class MatiereController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Matiere::create([
+            'code' => $request->code,
+            'intitule' => $request->matiere,
+            'quota_horaire' => $request->quota,
+            'semestre' => $request->semestre,
+            'prix_unitaire' => $request->prix,
+            'enseignant_code' => $request->enseignant,
+            'niveau_id' => $request->niveau,
+        ]);
+
+        return redirect()->route('matieres.index');
     }
 
     /**
@@ -46,7 +66,9 @@ class MatiereController extends Controller
      */
     public function show(Matiere $matiere)
     {
-        //
+        $matieres = Matiere::whereCode($matiere->code)->first();
+
+        return view('pages.matiere.show', compact('matieres'));
     }
 
     /**
@@ -57,7 +79,14 @@ class MatiereController extends Controller
      */
     public function edit(Matiere $matiere)
     {
-        //
+        $enseignants = Enseignant::all();
+
+        $niveaux = Niveau::all();
+
+        $matieres = Matiere::whereCode($matiere->code)->firstOrFail();
+
+        return view('pages.matiere.edit', compact('matieres', 'enseignants', 'niveaux'));
+
     }
 
     /**
@@ -69,7 +98,19 @@ class MatiereController extends Controller
      */
     public function update(Request $request, Matiere $matiere)
     {
-        //
+        $matieres = Matiere::whereCode($matiere->code)->firstOrFail();
+
+        $matieres->update([
+            'code' => $request->code,
+            'intitule' => $request->matiere,
+            'quota_horaire' => $request->quota,
+            'semestre' => $request->semestre,
+            'prix_unitaire' => $request->prix,
+            'enseignant_code' => $request->enseignant,
+            'niveau_id' => $request->niveau,
+        ]);
+
+        return redirect()->route('matieres.show', $matieres);
     }
 
     /**
@@ -80,6 +121,8 @@ class MatiereController extends Controller
      */
     public function destroy(Matiere $matiere)
     {
-        //
+        Matiere::destroy($matiere->code);
+
+        return redirect()->route('matieres.index');
     }
 }

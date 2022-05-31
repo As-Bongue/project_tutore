@@ -14,7 +14,9 @@ class FiliereController extends Controller
      */
     public function index()
     {
-        //
+        $filieres = Filiere::all();
+
+        return view('pages.filiere.filieres', compact('filieres'));
     }
 
     /**
@@ -24,7 +26,9 @@ class FiliereController extends Controller
      */
     public function create()
     {
-        //
+        $filieres = new Filiere();
+
+        return view('pages.filiere.create', compact('filieres'));
     }
 
     /**
@@ -35,7 +39,12 @@ class FiliereController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Filiere::create([
+            'code' => $request->code,
+            'intitule' => $request->filiere,
+        ]);
+
+        return redirect()->route('filiere.index');
     }
 
     /**
@@ -46,7 +55,9 @@ class FiliereController extends Controller
      */
     public function show(Filiere $filiere)
     {
-        //
+        $filieres = Filiere::whereCode($filiere->code)->first();
+
+        return view('pages.filiere.show', compact('filieres'));
     }
 
     /**
@@ -57,7 +68,9 @@ class FiliereController extends Controller
      */
     public function edit(Filiere $filiere)
     {
-        //
+        $filieres = Filiere::whereCode($filiere->code)->firstOrFail();
+
+        return view('pages.filiere.edit', compact('filieres'));
     }
 
     /**
@@ -69,7 +82,14 @@ class FiliereController extends Controller
      */
     public function update(Request $request, Filiere $filiere)
     {
-        //
+        $filieres = Filiere::whereCode($filiere->code)->firstOrFail();
+
+        $filieres->update([
+            'code' => $request->code,
+            'intitule' => $request->filiere,
+        ]);
+
+        return redirect()->route('filiere.show', $filieres);
     }
 
     /**
@@ -80,6 +100,8 @@ class FiliereController extends Controller
      */
     public function destroy(Filiere $filiere)
     {
-        //
+        Filiere::destroy($filiere->code);
+
+        return redirect()->route('filiere.index');
     }
 }

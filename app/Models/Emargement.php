@@ -10,7 +10,7 @@ class Emargement extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['heure_debut', 'heure_fin'];
+    protected $fillable = ['heure_debut', 'heure_fin', 'jour', 'matiere_code', 'moi_id'];
 
     public function matiere() : BelongsTo
     {

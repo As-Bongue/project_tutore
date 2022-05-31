@@ -10,6 +10,6 @@
         @include('pages.enseignant._form', ['submitButton' => 'Creer'])
     </form>
 
-    <p><a href="">Accueil</a></p>
+    <p><a href=" {{route('enseignant.index')}} ">Accueil</a></p>
 
 @stop

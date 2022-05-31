@@ -2,11 +2,11 @@
 
 @section('content')
 
-    <h1>Liste des annees academique</h1>
+    <h1 class="h1 text-center">Liste des annees academique</h1>
 
     <hr>
-    @forelse ($ans as $an)
-        <p><a href="{{ route('annee.show', $an->id) }}">{{ $an->libele }}</a></p>
+    @forelse ($annees as $annee)
+        <p><a href="{{ route('annees.show', $annee->id) }}">{{ $annee->libele }}</a></p>
 
         <hr>
     @empty
@@ -14,6 +14,6 @@
     @endforelse
 
     <p>
-        <a href="{{ route('annee.create') }}">Ajouter une annee</a>
+        <a href="{{ route('annees.create') }}">Ajouter une annee</a>
     </p>
 @stop

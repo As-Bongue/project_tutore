@@ -1,10 +1,19 @@
 require('./bootstrap');
 
-import { createApp } from 'vue';
+/* global bootstrap: false */
+(function () {
+    'use strict'
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+      new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+  })()
 
-createApp({
-    components: {}
-})
+// import { createApp } from 'vue';
 
-.use(router)
-.mount('#app');
+// createApp({
+//     components: {}
+// })
+
+// .use(router)
+// .mount('#app');

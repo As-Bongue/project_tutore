@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cycle;
 use App\Models\Niveau;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class NiveauController extends Controller
      */
     public function index()
     {
-        //
+        $niveaux = Niveau::all();
+
+        return view('pages.niveau.niveaux', compact('niveaux'));
     }
 
     /**
@@ -24,7 +27,11 @@ class NiveauController extends Controller
      */
     public function create()
     {
-        //
+        $niveaux = new Niveau();
+
+        $cycles = Cycle::all();
+
+        return view('pages.niveau.create', compact('niveaux','cycles'));
     }
 
     /**
@@ -35,7 +42,12 @@ class NiveauController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Niveau::create([
+            'intitule' => $request->niveau,
+            'cycle_code' => $request->cycle,
+        ]);
+
+        return redirect()->route('niveau.index');
     }
 
     /**
@@ -46,7 +58,9 @@ class NiveauController extends Controller
      */
     public function show(Niveau $niveau)
     {
-        //
+        $niveaux = Niveau::whereId($niveau->id)->first();
+
+        return view('pages.niveau.show', compact('niveaux'));
     }
 
     /**
@@ -57,7 +71,11 @@ class NiveauController extends Controller
      */
     public function edit(Niveau $niveau)
     {
-        //
+        $cycles = Cycle::all();
+
+        $niveaux = Niveau::whereId($niveau->id)->firstOrFail();
+
+        return view('pages.niveau.edit', compact('niveaux', 'cycles'));
     }
 
     /**
@@ -69,7 +87,14 @@ class NiveauController extends Controller
      */
     public function update(Request $request, Niveau $niveau)
     {
-        //
+        $niveaux = Niveau::whereId($niveau->id)->firstOrFail();
+
+        $niveaux->update([
+            'intitule' => $request->niveau,
+            'cycle_code' => $request->cycle,
+        ]);
+
+        return redirect()->route('niveau.show', $niveau);
     }
 
     /**
@@ -80,6 +105,8 @@ class NiveauController extends Controller
      */
     public function destroy(Niveau $niveau)
     {
-        //
+        Niveau::destroy($niveau->id);
+
+        return redirect()->route('niveau.index');
     }
 }

@@ -1,7 +1,7 @@
 @extends('layourts.app')
 
 @section('content')
-    <h1>liste de tous les enseignants</h1>
+    <h1 class="h1 text-center">liste de tous les enseignants</h1>
 
     <hr>
 

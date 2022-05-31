@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('cycles', function (Blueprint $table) {
-            $table->id();
+            $table->string('code')->primary();
             $table->string('intitule')->unique();
             $table->timestamps();
         });

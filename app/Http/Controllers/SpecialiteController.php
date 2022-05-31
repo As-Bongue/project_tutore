@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Filiere;
 use App\Models\Specialite;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class SpecialiteController extends Controller
      */
     public function index()
     {
-        //
+        $specialites = Specialite::all();
+
+        return view('pages.specialite.specialites', compact('specialites'));
     }
 
     /**
@@ -24,7 +27,11 @@ class SpecialiteController extends Controller
      */
     public function create()
     {
-        //
+        $filieres = Filiere::all();
+
+        $specialites = new Specialite();
+
+        return view('pages.specialite.create', compact('specialites', 'filieres'));
     }
 
     /**
@@ -35,7 +42,13 @@ class SpecialiteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Specialite::create([
+            'code' => $request->code,
+            'intitule' => $request->specialite,
+            'filiere_code' => $request->filiere,
+        ]);
+
+        return redirect()->route('specialite.index');
     }
 
     /**
@@ -46,7 +59,9 @@ class SpecialiteController extends Controller
      */
     public function show(Specialite $specialite)
     {
-        //
+        $specialites = Specialite::whereCode($specialite->code)->first();
+
+        return view('pages.specialite.show', compact('specialites'));
     }
 
     /**
@@ -57,7 +72,11 @@ class SpecialiteController extends Controller
      */
     public function edit(Specialite $specialite)
     {
-        //
+        $filieres = Filiere::all();
+
+        $specialites = Specialite::whereCode($specialite->code)->firstOrFail();
+
+        return view('pages.specialite.edit', compact('specialites', 'filieres'));
     }
 
     /**
@@ -69,7 +88,15 @@ class SpecialiteController extends Controller
      */
     public function update(Request $request, Specialite $specialite)
     {
-        //
+        $specialites = Specialite::whereCode($specialite->code)->firstOrFail();
+
+        $specialite->update([
+            'code' => $request->code,
+            'intitule' => $request->specialite,
+            'filiere_code' => $request->filiere,
+        ]);
+
+        return redirect()->route('specialite.show', $specialite);
     }
 
     /**
@@ -80,6 +107,8 @@ class SpecialiteController extends Controller
      */
     public function destroy(Specialite $specialite)
     {
-        //
+        Specialite::destroy($specialite->code);
+
+        return redirect()->route('specialite.index');
     }
 }

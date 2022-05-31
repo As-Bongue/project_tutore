@@ -11,7 +11,7 @@ class Niveau extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['intitule'];
+    protected $guarded = [];
 
     public function matires() : HasMany
     {
